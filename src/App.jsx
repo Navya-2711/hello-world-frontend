@@ -9,7 +9,8 @@ function App() {
   const callEndpoint = async (endpoint, key) => {
     setLoading(prev => ({ ...prev, [key]: true }))
     try {
-      const response = await axios.get(`/api${endpoint}`)
+      const backendUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
+      const response = await axios.get(`${backendUrl}${endpoint}`)
       setResponses(prev => ({ ...prev, [key]: response.data }))
     } catch (error) {
       setResponses(prev => ({ 
